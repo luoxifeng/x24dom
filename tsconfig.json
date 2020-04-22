@@ -1,2 +1,20 @@
 {
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+    },
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "lib": ["dom", "es2017"],
+    "skipLibCheck": true,
+    "strict": true,
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules"]
 }
