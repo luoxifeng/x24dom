@@ -2,17 +2,24 @@
  * 
  */
 import { getChildrenVnodeMap } from "./utils";
+import { VNodeDiff, X24DomVNode, Encrypt } from '../typings';
 
-const fllterEmpty = arr => arr.filter(t => t !== "");
+const fllterEmpty = (arr: string[] = []) => arr.filter(t => t !== "");
 const diffType = (obj1, obj2) => (typeof obj1 !== typeof obj2) || (obj1.type !== obj2.type);
-const isStr = str => typeof str === "string";
-const isNum = num => typeof num === "number";
-const isStrOrNum = str => isStr(str) || isNum(str);
-const joinPath = (...paths) => fllterEmpty(paths).join("|");
+const isStr = (str: any) => typeof str === "string";
+const isNum = (num: any) => typeof num === "number";
+const isStrOrNum = (str: any) => isStr(str) || isNum(str);
+const joinPath = (...paths: string[]) => fllterEmpty(paths).join("|");
 
 
-export const diffStrOrNum = (oldVal, newVal, path, encrypt = null, callback = (...args: any[]) => {}) => {
-    let dif = null;
+export const diffStrOrNum = (
+    oldVal, 
+    newVal, 
+    path, 
+    encrypt: Encrypt | null, 
+    callback = (diff: VNodeDiff) => console.log(diff)
+) => {
+    let dif: VNodeDiff = null;
     if (oldVal !== newVal) {
         dif = {
             path,
@@ -39,7 +46,7 @@ export function diff(
     newVNode, 
     parentPath = "",
     currPath = '',
-    batch = []
+    batch: VNodeDiff[]  = []
 ) {
     const fullPath = joinPath(parentPath, currPath);
 
@@ -47,7 +54,13 @@ export function diff(
      * 文本节点
      */
     if (newVNode.type === "_text" && oldVNode.text !== newVNode.text) {
-        diffStrOrNum(oldVNode.text || "", newVNode.text || "", `${fullPath}|text`, newVNode.encrypt, dif => batch.push(dif));
+        diffStrOrNum(
+            oldVNode.text || "", 
+            newVNode.text || "", 
+            `${fullPath}|text`, 
+            newVNode.encrypt, 
+            dif => batch.push(dif)
+        );
         return;
     }
 
@@ -123,4 +136,4 @@ export function diff(
     return batch;
 }
 
-window.x24Diff = diff;
+// window.x24Diff = diff;
