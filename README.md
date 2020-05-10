@@ -23,7 +23,7 @@
 - renderToString  
 把vdom渲染成字符串
 
-- parsedom
+- parsedom  
 把真实dom转换成vnode
 - utils 
 
