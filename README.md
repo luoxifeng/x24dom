@@ -23,11 +23,13 @@
 - renderToString  
 把vdom渲染成字符串
 
-
+- parsedom  
+把真实dom转换成vnode
 - utils 
 
 - diff
+对比两个vnode得到差异
 
 - patch
-
+根据原始的vnode以及diff产生的vnodediff合成新的vnode
 - vnode  
