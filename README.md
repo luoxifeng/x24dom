@@ -33,3 +33,5 @@
 - patch
 根据原始的vnode以及diff产生的vnodediff合成新的vnode
 - vnode  
+
+## 真实场景demo
