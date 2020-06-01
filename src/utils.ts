@@ -1,7 +1,14 @@
-export const deepClone = obj => {
+const typeIsCreator = (type: string) => (target: any) => typeof target === type;
+export const isFun = typeIsCreator("function");
+export const isObj = typeIsCreator("object");
+
+export const deepClone = (obj: any) => {
   let clone = { ...obj };
 
-  Object.keys(clone).forEach(key => (clone[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key]));
+  Object.keys(clone)
+    .forEach(key => {
+      clone[key] = isObj(obj[key]) ? deepClone(obj[key]) : obj[key]
+    });
 
   return Array.isArray(obj) && obj.length
       ? (clone.length = obj.length) && Array.from(clone)
@@ -37,4 +44,4 @@ export const isDomElement = (() => {
       : el => el && typeof el === 'object' && el.nodeType === 1 && typeof el.nodeName === 'string';
 })();
 
-export const isFun = fun => typeof fun === "function";
+
