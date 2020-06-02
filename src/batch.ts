@@ -2,13 +2,14 @@
  * 
  */
 import { deepClone } from "./utils";
+import { VNodeDiff, VNode } from '../typings';
 
 /**
  * 根据原始vnode, 以及差异，还原当前的vnode
  * @param {*} oldVNode 
  * @param {*} diffs 
  */
-export const batch = (oldVNode, diffs) => {
+export const batch = (oldVNode: VNode, diffs: VNodeDiff[]) => {
     const cloneVNode = deepClone(oldVNode);
     
     diffs.forEach(({
