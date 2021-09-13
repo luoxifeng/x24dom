@@ -109,7 +109,8 @@ export function diff(
             }
         });
 
-        Object.keys(newVal).forEach(key => {
+        Object.keys(newVal)
+        .forEach(key => {
             if (Object.prototype.hasOwnProperty.call(oldVal, key)) return;
             batch.push({
                 path: [fpath, key].join("|"),
